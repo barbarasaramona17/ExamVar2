@@ -57,6 +57,28 @@ app.get('/authors', async (req, res) => {
 	// TODO: adăugați funcția pentru cererea listei autorilor
 	// ar trebui să trimită clientului lista autorilor
 	// ar trebui să permită paginare cu un număr de pagina pageNo și o mărime de pagină pageSize trimiși prin query 
+try{
+		let pageSize = parseInt(req.query.pageSize) 
+		pageSize = pageSize ? parseInt(req.query.pageSize) : 5
+		let authors
+		let pageNo = parseInt(req.query.pageNo)
+		if (pageNo){
+			authors = await Author.findAll({
+				offset : pageNo * pageSize,
+				limit : pageSize
+			})			
+		}
+		else{
+			authors = await Author.findAll()
+		}
+		res.status(200).json(authors)
+	}
+	catch(err){
+		console.warn(err.stack)
+		res.status(500).json({message : 'server error'})		
+	}
+	
+	
 	// TODO: add the function to get all authors
 	// should get all authors
 	// should allow for pagination with a pageNo and a pageSize possibly sent as query parameters

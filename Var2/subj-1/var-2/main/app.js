@@ -34,7 +34,29 @@ class Bird {
 
 
 // TODO: implementați tipul Pinguin
+
+class Penguin extends Bird{
+	constructor(name){
+		if (!name || typeof name !== 'string'){
+			throw new Error('CreationError')
+		}
+		super(name)
+	}
+
+	fly(distance){
+		return `${this.name} is a penguin and cannot fly`
+	}
+	
+	swim(distance){
+		return `${this.name} swims ${distance}` 
+	}
+	
+}
+
+
+
 // TODO: implement the Penguin type
 
+
 module.exports.Bird = Bird
-// module.exports.Penguin = Penguin
+module.exports.Penguin = Penguin
